@@ -1,7 +1,7 @@
+import { useEffect, useState } from "react";
 import Beams from "../components/Beams";
 import OrbitImages from "@/components/OrbitImages";
-const photo = (id) =>
-  `https://images.unsplash.com/${id}?w=600&q=80&auto=format&fit=max`;
+import BlurText from "../components/BlurText";
 
 const carouselImages = [
   "https://i.pinimg.com/1200x/1e/2a/17/1e2a17097f05d0025bcd86eaa4848862.jpg ",
@@ -11,27 +11,27 @@ const carouselImages = [
   "https://i.pinimg.com/736x/7c/10/a9/7c10a9ed8456f7c34781e27bfc9a3950.jpg",
   "https://i.pinimg.com/1200x/fc/04/6a/fc046ad06b66d5ad23300955c12dc1fe.jpg",
 ];
-import BlurText from "../components/BlurText";
-import SpecularButton from "../components/SpecularButton";
-import { Link } from "react-router-dom";
-import { Url } from "@hugeicons/core-free-icons";
+const mobileCarouselImages = carouselImages.slice(0, 4);
 
 function About() {
-  const skills = {
-    frontend: [
-      "React",
-      "JavaScript (ES6+)",
-      "Tailwind CSS",
-      "HTML5 / CSS3",
-      "Vite",
-    ],
-    backendAndTools: [
-      "Node.js (asoslar)",
-      "Git & GitHub",
-      "REST API",
-      "VS Code",
-    ],
-  };
+  const [carouselBreakpoint, setCarouselBreakpoint] = useState(() => {
+    if (typeof window === "undefined") return "desktop";
+    if (window.innerWidth <= 720) return "mobile";
+    return window.innerWidth <= 1024 ? "tablet" : "desktop";
+  });
+  const isMobile = carouselBreakpoint === "mobile";
+  const isTablet = carouselBreakpoint === "tablet";
+
+  useEffect(() => {
+    const updateCarouselBreakpoint = () => {
+      const width = window.innerWidth;
+      setCarouselBreakpoint(
+        width <= 720 ? "mobile" : width <= 1024 ? "tablet" : "desktop",
+      );
+    };
+    window.addEventListener("resize", updateCarouselBreakpoint);
+    return () => window.removeEventListener("resize", updateCarouselBreakpoint);
+  }, []);
 
   return (
     <div className="about-page">
@@ -79,11 +79,11 @@ function About() {
 
       <div className="about-carousel">
         <OrbitImages
-          images={carouselImages}
+          images={isMobile ? mobileCarouselImages : carouselImages}
           shape="ellipse"
-          radiusX={700}
-          radiusY={170}
-          itemSize={220}
+          radiusX={isMobile ? 110 : isTablet ? 340 : 700}
+          radiusY={isMobile ? 90 : isTablet ? 120 : 170}
+          itemSize={isMobile ? 200 : 220}
           duration={33}
           height="100%"
         />

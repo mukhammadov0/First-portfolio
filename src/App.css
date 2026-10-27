@@ -12,7 +12,7 @@ body{
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  overflow: hidden;
+  overflow-x: hidden;
   background: #08070d;
   color: #fff;
   font-family: Inter, system-ui, sans-serif;
@@ -156,19 +156,30 @@ body{
   font-size: 12px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 960px) {
+  .hero-section,
+  .portfolio-footer {
+    width: min(100% - 32px, 1120px);
+  }
+
+  .hero-description {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 720px) {
   .navbar,
   .hero-section,
   .portfolio-footer {
-    width: calc(100% - 36px);
+    width: min(100% - 24px, 1120px);
   }
 
   .navbar {
-    padding: 22px 0;
+    padding: 20px 0;
   }
 
   .nav-links {
-    gap: 14px;
+    gap: 12px;
   }
 
   .nav-links a {
@@ -176,15 +187,74 @@ body{
   }
 
   .hero-section {
-    padding: 70px 0 90px;
+    padding: 56px 0 72px;
   }
 
   .hero-section h1 {
     letter-spacing: -2px;
   }
 
+  .hero-description {
+    font-size: 15px;
+    line-height: 1.7;
+  }
+
   .portfolio-footer {
     flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    padding: 18px 0;
+  }
+
+  .about-header {
+    padding: 28px 20px 0;
+  }
+
+  .about-section {
+    padding: 64px 20px 48px;
+  }
+
+  .about-header h1 {
+    font-size: clamp(2.8rem, 13vw, 5rem);
+  }
+
+  .contacts-page {
+    padding: 120px 16px 64px;
+    gap: 30px;
+  }
+
+  .contacts-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-card {
+    min-height: 0;
+    padding: 22px 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .eyebrow {
+    letter-spacing: 2px;
+  }
+
+  .hero-section h1 {
+    font-size: clamp(2.5rem, 14vw, 4rem);
+  }
+
+  .hero-actions {
+    width: 100%;
+    gap: 12px;
+  }
+
+  .primary-button {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+  }
+
+  .portfolio-footer {
+    font-size: 11px;
   }
 }
 .about-page {
@@ -687,4 +757,21 @@ a.contact-card:hover::after {
   background: #d6a1ff;
   border-color: #d6a1ff;
   color: #12032a;
+}
+
+@media (max-width: 1024px) {
+  .about-carousel {
+    height: clamp(390px, 55vw, 460px);
+  }
+}
+
+@media (max-width: 720px) {
+  .about-carousel {
+    height: clamp(320px, 100vw, 400px);
+    margin: 48px 0 64px;
+  }
+
+  .about-header h1 {
+    letter-spacing: -2px;
+  }
 }

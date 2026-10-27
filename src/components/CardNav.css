@@ -362,6 +362,24 @@
   height: 44px;
 }
 
+@media (max-width: 560px) {
+  .card-nav__menu {
+    padding-inline: 10px;
+  }
+
+  .card-nav__menu-label {
+    max-width: 72px;
+  }
+
+  .card-nav__card {
+    min-height: 0;
+  }
+
+  .card-nav__link {
+    font-size: 13px;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .card-nav__line,
   .card-nav__word,
